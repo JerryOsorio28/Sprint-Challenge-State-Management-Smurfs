@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { setState } from 'react';
+import { connect } from 'react-redux';
 
 //Only the best hook to grab state
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 
 //import PostData action creator
 import { postData } from '../actions'
 
-const SmurfForm = () => {
+const SmurfForm = (props) => {
+    console.log(props)
 
-    let smurfsList = useSelector(state => state.smurfsList)
-    console.log(smurfsList)
+    // let smurfsList = useSelector(state => state.smurfsList)
+    // console.log(smurfsList)
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
+
 
     const changeHandler = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
+        setState({[e.target.name]: e.target.value})
+
+        
     }
 
     // const submitHandler = (e) => {
@@ -31,7 +37,8 @@ const SmurfForm = () => {
                     <input 
                         onChange={changeHandler} 
                         type='text'
-                        name='name' 
+                        name='name'
+                        value={name}
                         placeholder='Name' 
                     />
                 </label>
@@ -41,6 +48,7 @@ const SmurfForm = () => {
                         onChange={changeHandler} 
                         type='text' 
                         name='age' 
+                       value={age} 
                         placeholder='Age' 
                     />
                 </label>
@@ -50,6 +58,7 @@ const SmurfForm = () => {
                         onChange={changeHandler} 
                         type='text' 
                         name='height' 
+                        value={height} 
                         placeholder='Height' 
                     />
                 </label>
@@ -59,4 +68,11 @@ const SmurfForm = () => {
     )   
 };
 
-export default SmurfForm;
+const mapStateToProps = state => {
+    // console.log('from mapStatetoProps', state.smurfsList)
+    return {
+        smurfsList: state.smurfsList
+    }
+}
+
+export default connect(mapStateToProps,{ postData })(SmurfForm);
