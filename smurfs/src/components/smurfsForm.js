@@ -1,4 +1,4 @@
-import React, { setState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 //Only the best hook to grab state
@@ -14,31 +14,29 @@ const SmurfForm = (props) => {
     // console.log(smurfsList)
 
     // const dispatch = useDispatch()
-
+    const [smurf, setSmurf] = useState({name: '', age: '', height: ''});
 
     const changeHandler = (e) => {
         // console.log(e.target.value)
-        setState({[e.target.name]: e.target.value})
-
-        
+        setSmurf({...smurf, [e.target.name]: e.target.value})
     }
 
-    // const submitHandler = (e) => {
-    //     e.preventDefault();
-    //     console.log(smurfsList)
-    // }
-
+    const submitHandler = (e) => {
+        e.preventDefault();
+        props.postData(smurf)
+        console.log(smurf)
+    }
 
     return (
         <>
-            <form>
+            <form onSubmit = {submitHandler}>
                 <label>
                     Smurf Name:
                     <input 
                         onChange={changeHandler} 
                         type='text'
                         name='name'
-                        value={name}
+                        value={smurf.name}
                         placeholder='Name' 
                     />
                 </label>
@@ -48,7 +46,7 @@ const SmurfForm = (props) => {
                         onChange={changeHandler} 
                         type='text' 
                         name='age' 
-                       value={age} 
+                       value={smurf.age} 
                         placeholder='Age' 
                     />
                 </label>
@@ -58,7 +56,7 @@ const SmurfForm = (props) => {
                         onChange={changeHandler} 
                         type='text' 
                         name='height' 
-                        value={height} 
+                        value={smurf.height} 
                         placeholder='Height' 
                     />
                 </label>
