@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-//Only the best hook to grab state
-// import { useSelector, useDispatch } from 'react-redux'
-
 //import PostData action creator
 import { postData } from '../actions'
 
 const SmurfForm = (props) => {
-    console.log(props)
 
-    // let smurfsList = useSelector(state => state.smurfsList)
-    // console.log(smurfsList)
-
-    // const dispatch = useDispatch()
     const [smurf, setSmurf] = useState({name: '', age: '', height: ''});
 
+    //Keeps track of your input and set's value to state
     const changeHandler = (e) => {
         // console.log(e.target.value)
         setSmurf({...smurf, [e.target.name]: e.target.value})
@@ -29,7 +22,7 @@ const SmurfForm = (props) => {
 
     return (
         <>
-            <form onSubmit = {submitHandler}>
+            <form onSubmit={submitHandler}>
                 <label>
                     Smurf Name:
                     <input 
