@@ -12,9 +12,6 @@ import Loader from 'react-loader-spinner'
 //import Smurf Component
 import Smurf from './Smurf';
 
-//import PostData action creator
-import { postData } from '../actions'
-
 
 const SmurfsList = () => {
 
